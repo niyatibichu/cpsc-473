@@ -1,0 +1,27 @@
+.demo-list-action {
+  width: 300px;
+}
+
+body {
+  padding: 20px;
+  background: #fafafa;
+  position: relative;
+}
+
+.addActorButton{
+    margin-left: 1em;
+    margin-top: -1.6em;
+}
+
+#listOfActors{
+   margin-left: 35%;
+}
+
+.heading{
+    margin-left: 0.8em;
+    margin-bottom: 2.5em;
+}
+
+.star{
+    cursor: pointer;
+}

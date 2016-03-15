@@ -1,0 +1,29 @@
+{
+  "actors": [
+    {
+      "name": "Bryan Cranston",
+      "starred": true,
+      "id": 1
+    },
+    {
+      "name": "Aaron Paul",
+      "starred": false,
+      "id": 2
+    },
+    {
+      "name": "Bob Odenkirk",
+      "starred": true,
+      "id": 3
+    },
+    {
+      "name": "Dean Norris",
+      "starred": true,
+      "id": 4
+    },
+    {
+      "name": "gargi kulkarni",
+      "starred": false,
+      "id": 5
+    }
+  ]
+}
