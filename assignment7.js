@@ -22,7 +22,7 @@ app.get("/links", function (req, res) {
                         /*
                         to convert the _id-ObjectId to 'title' to send array in response
                         */
-                        items[i].title = items[i]._id;   
+                        items[i].title = items[i]._id;
                         delete items[i]._id;
                     }
                 }
@@ -30,7 +30,7 @@ app.get("/links", function (req, res) {
 
             });
         }
-         //db.close();
+        //db.close();
     });
 });
 
@@ -42,6 +42,7 @@ app.post("/links", function (req, res) {
             res.send("failed to connect to the db");
         }
         else {
+            var collection = db.collection('links');
             var links = req.body.links;
             for (var i in links) {
                 if (links[i] !== null) {
@@ -49,22 +50,21 @@ app.post("/links", function (req, res) {
                     /*
                     convertion 'title' to ObjectId _id 
                     while storing in db to prevent duplicate values with same title
-                    */ 
+                    */
                     link._id = link.title;
                     delete link.title;
                     link.clicks = 0;
+                
+                collection.insert(link, { w: 1 }, function (err, result) {
+                });
                 }
             }
-            var collection = db.collection('links');
-            collection.insert(links, { w: 1 }, function (err, result) {
-                res.send("successfully created and updated the db");
+            res.send("successfully created and updated the db");
 
-            });
-        
         }
-         //db.close();
+        //db.close();
     });
-    
+
 });
 
 //to increment the link count on click and update the link click count in db
@@ -90,7 +90,7 @@ app.get("/click/:title", function (req, res) {
                 });
 
         }
-         //db.close();
+        //db.close();
     });
 
 
