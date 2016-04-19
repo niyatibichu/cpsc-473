@@ -8,6 +8,7 @@ var url = 'mongodb://localhost:27017/test';
 var app = express();
 app.use(bodyParser.json());
 
+//to fetch all the links and return an array in response
 app.get("/links", function (req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) {
@@ -18,7 +19,10 @@ app.get("/links", function (req, res) {
             collection.find().toArray(function (err, items) {
                 for (var i in items) {
                     if (items[i] !== null) {
-                        items[i].title = items[i]._id;
+                        /*
+                        to convert the _id-ObjectId to 'title' to send array in response
+                        */
+                        items[i].title = items[i]._id;   
                         delete items[i]._id;
                     }
                 }
@@ -30,6 +34,7 @@ app.get("/links", function (req, res) {
     });
 });
 
+//to insert new links in db
 app.post("/links", function (req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) {
@@ -41,8 +46,13 @@ app.post("/links", function (req, res) {
             for (var i in links) {
                 if (links[i] !== null) {
                     var link = links[i];
+                    /*
+                    convertion 'title' to ObjectId _id 
+                    while storing in db to prevent duplicate values with same title
+                    */ 
                     link._id = link.title;
-                    delete link._id;
+                    delete link.title;
+						        link._id = link.title;
                     link.clicks = 0;
                 }
             }
@@ -58,6 +68,7 @@ app.post("/links", function (req, res) {
     
 });
 
+//to increment the link count on click and update the link click count in db
 app.get("/click/:title", function (req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) {
