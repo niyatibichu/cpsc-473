@@ -41,6 +41,8 @@ app.post("/links", function (req, res) {
             for (var i in links) {
                 if (links[i] !== null) {
                     var link = links[i];
+                    link._id = link.title;
+                    delete link._id;
                     link.clicks = 0;
                 }
             }
