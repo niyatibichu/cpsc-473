@@ -52,7 +52,6 @@ app.post("/links", function (req, res) {
                     */ 
                     link._id = link.title;
                     delete link.title;
-						        link._id = link.title;
                     link.clicks = 0;
                 }
             }
